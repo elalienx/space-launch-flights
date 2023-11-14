@@ -29,10 +29,10 @@ SpaceX launches from the public API [https://github.com/r-spacex/SpaceX-API/blob
 
 ## Requirements
 
-1. Disable pagination controls until the initial data is loaded.
-1. Disable Previous/Next page buttons if previous/next page is not available.
-1. Display current range of records (e.g. "1-10 of 1000") and a total number of launches.
-1. _SECRET_ Test a race condition when the user press the prev/next buttons on subsequent loadings.
+1. Disable pagination controls until the initial data is loaded. (⌛️ pending)
+1. Disable Previous/Next page buttons if previous/next page is not available. (✅ done)
+1. Display current range of records (e.g. "1-10 of 1000") and a total number of launches. (💼 working on it)
+1. _SECRET_ Test a race condition when the user press the prev/next buttons on subsequent loadings. (✅ done)
 
 ## Notes
 
