@@ -1,3 +1,7 @@
 export default function Loader() {
-  return <div className="loader">Loading... ⌛️</div>;
+  return (
+    <tr className="loader">
+      <td>Loading... ⌛️</td>
+    </tr>
+  );
 }
