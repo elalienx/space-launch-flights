@@ -1,70 +1,68 @@
 // Node modules
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 // Project files
 import ItemLaunch from "./components/ItemLaunch";
 import Loader from "./components/Loader";
 import Error from "./components/Error";
+import "./style/style.css";
 
+/**
+ * Requirements:
+ * 1. Disable pagination controls until the initial data is loaded.
+ * 2. Disable Previous/Next page buttons if previous/next page is not available.
+ * 3. Display current range of records (e.g. "1-10 of 1000") and a total number of launches.
+ * 4. Test a race condition when the user press the prev/next buttons on subsequent loadings.
+ */
 export default function App() {
   // Local state
-  // Refactor into Context API
-  const [docs, setDocs] = useState([]);
-  const [hasNextPage, setHasNextPage] = useState(false);
-  const [hasPrevPage, setHasPrevPage] = useState(false);
-  const [nextPage, setNextPage] = useState(null);
-  const [prevPage, setPrevPage] = useState(null);
-  const [totalDocs, setTotalDocs] = useState(0);
+  const [data, setData] = useState({
+    docs: [],
+    hasNextPage: false,
+    hasPrevPage: false,
+    totalDocs: 0,
+  });
   const [page, setPage] = useState(1);
-  const [offset, setOffset] = useState(0);
   const [status, setStatus] = useState(0); // 0 loading, 1 loaded, 2 error
-  const [initalLoad, setInitialLoad] = useState(false);
 
   // Properties
   const resource = "https://api.spacexdata.com/v5/launches/query";
-  const limitPerPage = 10;
-  const options = {
-    method: "POST",
-    body: { options: { page: page, limit: limitPerPage } },
-  };
-
-  // Derived state
-  const totalRecords = page * limitPerPage + offset;
+  const limit = 10;
+  const recordStart = page * limit;
+  const recordEnd = recordStart + 10;
 
   // Methods
   useEffect(() => {
+    const options = {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        options: { page: page, limit: limit },
+      }),
+    };
+
     fetch(resource, options)
       .then((response) => response.json())
       .then((result) => onSuccess(result))
       .catch((error) => onError(error));
-  }, []);
+  }, [page]);
 
   function onSuccess(result) {
-    const { docs, hasNextPage, hasPrevPage, nextPage, prevPage, totalDocs } =
-      result;
-
-    setDocs(docs);
-    setHasNextPage(hasNextPage);
-    setHasPrevPage(hasPrevPage);
-    setNextPage(nextPage);
-    setPrevPage(prevPage);
-    setTotalDocs(totalDocs);
+    setData(result);
     setStatus(1);
-    setInitialLoad(true);
   }
 
   function onError(error) {
     console.error(error);
-    alert("Could not load API, check console for more information.");
     setStatus(2);
   }
 
-  function onPrev() {}
-
-  function onNext() {}
-
   // Components
-  const Launches = docs.map((item) => <ItemLaunch key={item.id} item={item} />);
+  const Items = data?.docs.map((item) => (
+    <ItemLaunch key={item.id} item={item} />
+  ));
 
   // Safeguard
   if (status === 2) return <Error />;
@@ -83,24 +81,34 @@ export default function App() {
         </thead>
         <tbody>
           {status === 0 && <Loader />}
-          {status === 1 && Launches}
+          {status === 1 && Items}
         </tbody>
       </table>
 
-      {initalLoad && (
-        <section className="controls">
-          <button disabled={hasNextPage} onClick={() => onPrev()}>
-            Prev
-          </button>
-          <span> | </span>
-          <button disabled={hasPrevPage} onClick={() => onNext()}>
-            Next
-          </button>
-          <p>
-            Current range of records: {totalRecords} of {totalDocs}
-          </p>
-        </section>
-      )}
+      <section className="controls">
+        <button
+          disabled={!data.hasPrevPage}
+          onClick={() => setPage((currentPage) => currentPage - 1)}
+        >
+          Prev
+        </button>
+        <span> | </span>
+        <button
+          disabled={!data.hasNextPage}
+          onClick={() => setPage((currentPage) => currentPage + 1)}
+        >
+          Next
+        </button>
+        <hr />
+        <p>
+          Range of records {recordStart}-{recordEnd}
+        </p>
+        <p>
+          Total launches:
+          {data.totalDocs}
+        </p>
+        <p>Page: {page}</p>
+      </section>
     </div>
   );
 }

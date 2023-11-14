@@ -30,8 +30,9 @@ SpaceX launches from the public API [https://github.com/r-spacex/SpaceX-API/blob
 ## Requirements
 
 1. Disable pagination controls until the initial data is loaded.
-1. Disable Previous/Next page buttons if previous/next page is not available. ✅
+1. Disable Previous/Next page buttons if previous/next page is not available.
 1. Display current range of records (e.g. "1-10 of 1000") and a total number of launches.
+1. _SECRET_ Test a race condition when the user press the prev/next buttons on subsequent loadings.
 
 ## Notes
 
@@ -67,3 +68,11 @@ SpaceX launches from the public API [https://github.com/r-spacex/SpaceX-API/blob
 | date_local | Date      | The data in ISO 8601 format.              | 2006-03-25T10:30:00+12:00 |
 | name       | string    | The name of the rocket launched.          | FalconSat                 |
 | success    | boolean   | If the launch was a success or it failed. | FALSE                     |
+
+## Store strategy (⚠️ in progress)
+
+Due to the complexity of the API results (multiple keys, one big array of objects) I can normalize the data to group it in 3 elements:
+
+1. ` flights` (docs): The array of Flights, with a `get`and`set` to update the information on page change.
+1. `page`: The current page requested to the server with a `get` and `set` to be able to change the page # with the buttons.
+1. `controls`: An object grouping the remaining keys as they are read only. This allow me to expose a single `get` to read these properties.
