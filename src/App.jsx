@@ -50,6 +50,7 @@ export default function App() {
   }, [page]);
 
   function onSuccess(result) {
+    console.log(result);
     setData(result);
     setStatus(1);
   }

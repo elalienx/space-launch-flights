@@ -1,3 +1,15 @@
 button:disabled {
   background-color: gray;
 }
+
+.item-launch .name-and-patch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.item-launch .name-and-patch img {
+  width: 25px;
+  height: auto;
+  margin: 8px;
+}
