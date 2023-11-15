@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 
 // Project files
-import Error from "./components/Error";
 import PaginationControls from "./components/PaginationControls";
 import TableLaunch from "./components/TableLaunch";
 import "./style/style.css";
@@ -52,15 +51,14 @@ export default function App() {
   }
 
   // Safeguard
-  if (status === 2) return <Error />;
+  if (status === 2) return <p>Cannot load data ❌</p>;
 
   return (
     <div className="App">
       <h1>Space launches</h1>
       <TableLaunch data={data.docs} />
-      {status === 1 && (
-        <PaginationControls data={data} limit={limit} state={[page, setPage]} />
-      )}
+      {status === 0 && <p>Loading...</p>}
+      <PaginationControls data={data} limit={limit} state={[page, setPage]} />
     </div>
   );
 }
