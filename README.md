@@ -25,6 +25,15 @@ SpaceX launches from the public API [https://github.com/r-spacex/SpaceX-API/blob
     }
 ```
 
+## Component diagram
+
+Here is the diagram of the application, is quite simple but shows the props being pass to each component.
+
+- Blue: React component located in the `src/component/` folder.
+- Gray: Standard HTML tag.
+
+![Component diagram](component-diagram.png)
+
 ## Notes
 
 1. Fetch the data using "fetch" API (✅ ok)
@@ -51,15 +60,16 @@ SpaceX launches from the public API [https://github.com/r-spacex/SpaceX-API/blob
 ## Improvements
 
 1. Added the patches of each flight. Of course, i made sure to use the small image version for faster loading.
-2. Added a friendly date format without using a library like Moment.js.
+1. Added a friendly date format without using a library like Moment.js.
 
 ## Refactor ideas
 
+1. Use TypeScript to write interfaces intead of prop validations. Thus, eliminating the warnings thrown by ES lint. Plus the extra core robustness from having strong data typing.
 1. I mentioned moving the fetch to a hook called `useFetch`, however the exercise is short enought to keep `App.jsx` as it is.
-2. Use `nextPage` and `prevPage` to avoid using the callback in `setPage()`. This even allow us to ditch React and use pure JavaScript as we don't need to worry avoid having an state in sync (only for this type of small projects)
-3. Put a placeholder image while the rocket patches are loading. I was just too lazy to copy and paste the template code from any previous project hehe.
-4. Add my own/Zalando design system but creating the design in Figma would take too much time.
-5. Organize better the CSS. Right now everything is in one file.
+1. Use `nextPage` and `prevPage` to avoid using the callback in `setPage()`. This even allow us to ditch React and use pure JavaScript as we don't need to worry avoid having an state in sync (only for this type of small projects)
+1. Put a placeholder image while the rocket patches are loading. I was just too lazy to copy and paste the template code from any previous project hehe.
+1. Add my own/Zalando design system but creating the design in Figma would take too much time.
+1. Organize better the CSS. Right now everything is in one file.
 
 ## Schema
 
