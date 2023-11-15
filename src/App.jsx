@@ -96,7 +96,7 @@ export default function App() {
         </button>
         <hr />
         <p>
-          Range of records {recordStart}-{recordEnd}
+          Range of records {recordStart}-{recordEnd} (incomeplete code ⚠️)
         </p>
         <p>
           Total launches:
