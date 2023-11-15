@@ -32,15 +32,19 @@ SpaceX launches from the public API [https://github.com/r-spacex/SpaceX-API/blob
 1. Disable pagination controls until the initial data is loaded. (⌛️ pending)
 1. Disable Previous/Next page buttons if previous/next page is not available. (✅ done)
 1. Display current range of records (e.g. "1-10 of 1000") and a total number of launches. (💼 working on it)
-1. _SECRET_ Test a race condition when the user press the prev/next buttons on subsequent loadings. (✅ done)
 
 ## Notes
 
-1. Fetch the data using "fetch" API
-1. Use a hardcoded value for the number of records on a page, i.e. "limit" (e.g. 10)
-1. First page is 1, not 0
-1. API will ignore request payload if it's not specified as JSON explicitly
-1. Styling can be completely ignored
+1. Fetch the data using "fetch" API (✅ ok)
+1. Use a hardcoded value for the number of records on a page, i.e. "limit" (e.g. 10) (✅ ok)
+1. First page is 1, not 0 (✅ ok)
+1. API will ignore request payload if it's not specified as JSON explicitly (✅ ok)
+1. Styling can be completely ignored (✅ ok)
+
+## Refactoring
+
+1. Use the query option of GraphQL to return less data and make it easier to use.
+1. Use pageNext and pagePrev to skip the cleanup and just sent the correct next/prev page.
 
 ## Schema
 

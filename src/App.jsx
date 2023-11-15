@@ -1,5 +1,5 @@
 // Node modules
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Project files
 import ItemLaunch from "./components/ItemLaunch";
@@ -7,13 +7,6 @@ import Loader from "./components/Loader";
 import Error from "./components/Error";
 import "./style/style.css";
 
-/**
- * Requirements:
- * 1. Disable pagination controls until the initial data is loaded.
- * 2. Disable Previous/Next page buttons if previous/next page is not available.
- * 3. Display current range of records (e.g. "1-10 of 1000") and a total number of launches.
- * 4. Test a race condition when the user press the prev/next buttons on subsequent loadings.
- */
 export default function App() {
   // Local state
   const [data, setData] = useState({
