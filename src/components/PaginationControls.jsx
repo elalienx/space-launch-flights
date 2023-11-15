@@ -1,10 +1,10 @@
-export default function TableControls({ data, state }) {
+export default function TableControls({ data, limit, state }) {
   const [page, setPage] = state;
-  const { hasPrevPage, hasNextPage, totalDocs, offset } = data;
+  const { hasPrevPage, hasNextPage, totalDocs } = data;
 
   // Properties
-  const recordStart = page * offset;
-  const recordEnd = recordStart + offset;
+  const recordStart = (page - 1) * limit + 1;
+  const recordEnd = Math.min(recordStart + limit - 1, totalDocs);
 
   return (
     <section className="table-controls">

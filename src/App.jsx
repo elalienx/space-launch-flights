@@ -57,9 +57,10 @@ export default function App() {
   return (
     <div className="App">
       <h1>Space launches</h1>
-
       <TableLaunch data={data.docs} />
-      <PaginationControls data={data} state={[page, setPage]} />
+      {status === 1 && (
+        <PaginationControls data={data} limit={limit} state={[page, setPage]} />
+      )}
     </div>
   );
 }
