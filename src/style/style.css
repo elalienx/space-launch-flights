@@ -1,3 +1,4 @@
+/* Base elements */
 button:disabled {
   background-color: gray;
 }
@@ -9,8 +10,16 @@ button:disabled {
   max-width: 200px;
 }
 
+/* Components */
 .item-launch img {
   width: 25px;
   height: 25px;
   margin: 0;
+}
+
+.table-controls {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
 }

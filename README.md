@@ -46,6 +46,8 @@ SpaceX launches from the public API [https://github.com/r-spacex/SpaceX-API/blob
 
 ## Schema
 
+For the most up to date version please check the Schema.numbers (open it with Apple Numbers)
+
 ### API
 
 | Key           | Data type      | Description                                                                                                                                                            | Example |

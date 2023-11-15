@@ -1,13 +1,12 @@
+// Project files
+import friendlyDate from "../scripts/friendlyDate";
+
 export default function ItemLaunch({ item }) {
   const { name, date_local, success, links } = item;
 
   // Properties
   const imageSource = links?.patch?.small;
-  const friendlyDate = new Date(date_local).toLocaleDateString("en-gb", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
+  const date = friendlyDate(date_local);
   const launchSuccess = success ? "Yay ✅" : "Nay ❌";
 
   return (
@@ -16,7 +15,7 @@ export default function ItemLaunch({ item }) {
         <img src={imageSource} />
       </td>
       <td className="truncate">{name}</td>
-      <td>{friendlyDate}</td>
+      <td>{date}</td>
       <td>{launchSuccess}</td>
     </tr>
   );

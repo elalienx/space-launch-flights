@@ -2,9 +2,9 @@
 import { useEffect, useState } from "react";
 
 // Project files
-import ItemLaunch from "./components/ItemLaunch";
-import Loader from "./components/Loader";
 import Error from "./components/Error";
+import PaginationControls from "./components/PaginationControls";
+import TableLaunch from "./components/TableLaunch";
 import "./style/style.css";
 
 export default function App() {
@@ -21,8 +21,6 @@ export default function App() {
   // Properties
   const resource = "https://api.spacexdata.com/v5/launches/query";
   const limit = 10;
-  const recordStart = page * limit;
-  const recordEnd = recordStart + 10;
 
   // Methods
   useEffect(() => {
@@ -53,11 +51,6 @@ export default function App() {
     setStatus(2);
   }
 
-  // Components
-  const Items = data?.docs.map((item) => (
-    <ItemLaunch key={item.id} item={item} />
-  ));
-
   // Safeguard
   if (status === 2) return <Error />;
 
@@ -65,45 +58,8 @@ export default function App() {
     <div className="App">
       <h1>Space launches</h1>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Patch</th>
-            <th>Launch name</th>
-            <th>Date</th>
-            <th>Successful?</th>
-          </tr>
-        </thead>
-        <tbody>
-          {status === 0 && <Loader />}
-          {status === 1 && Items}
-        </tbody>
-      </table>
-
-      <section className="controls">
-        <button
-          disabled={!data.hasPrevPage}
-          onClick={() => setPage((currentPage) => currentPage - 1)}
-        >
-          Prev
-        </button>
-        <span> | </span>
-        <button
-          disabled={!data.hasNextPage}
-          onClick={() => setPage((currentPage) => currentPage + 1)}
-        >
-          Next
-        </button>
-        <hr />
-        <p>
-          Range of records {recordStart}-{recordEnd} (incomeplete code ⚠️)
-        </p>
-        <p>
-          Total launches:
-          {data.totalDocs}
-        </p>
-        <p>Page: {page}</p>
-      </section>
+      <TableLaunch data={data.docs} />
+      <PaginationControls data={data} state={[page, setPage]} />
     </div>
   );
 }
