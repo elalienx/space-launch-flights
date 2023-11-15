@@ -2,14 +2,15 @@ button:disabled {
   background-color: gray;
 }
 
-.item-launch .name-and-patch {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+.truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
 }
 
-.item-launch .name-and-patch img {
+.item-launch img {
   width: 25px;
-  height: auto;
-  margin: 8px;
+  height: 25px;
+  margin: 0;
 }

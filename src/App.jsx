@@ -68,9 +68,10 @@ export default function App() {
       <table>
         <thead>
           <tr>
+            <th>Patch</th>
             <th>Launch name</th>
             <th>Date</th>
-            <th>Successful</th>
+            <th>Successful?</th>
           </tr>
         </thead>
         <tbody>
