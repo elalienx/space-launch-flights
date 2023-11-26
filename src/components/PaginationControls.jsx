@@ -1,4 +1,4 @@
-export default function TableControls({ data, limit, state }) {
+export default function PaginationControls({ data, limit, state }) {
   const [page, setPage] = state;
   const { hasPrevPage, hasNextPage, totalDocs } = data;
 
