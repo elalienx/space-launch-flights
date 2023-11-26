@@ -10,12 +10,10 @@ export default function App() {
   // Local state
   const [data, setData] = useState({
     docs: [],
-    hasNextPage: false,
-    hasPrevPage: false,
+    page: 1,
     limit: 10,
     totalDocs: 0,
   });
-  const [page, setPage] = useState(1);
   const [status, setStatus] = useState(0); // 0 loading, 1 loaded, 2 error
 
   // Properties
@@ -29,7 +27,7 @@ export default function App() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        options: { page: page, limit: data.limit },
+        options: { page: data.page, limit: data.limit },
       }),
     };
 
@@ -37,7 +35,7 @@ export default function App() {
       .then((response) => response.json())
       .then((result) => onSuccess(result))
       .catch((error) => onError(error));
-  }, [page]);
+  }, [data.page]);
 
   function onSuccess(result) {
     console.log(result);
@@ -58,7 +56,7 @@ export default function App() {
       <h1>Space launches</h1>
       <TableLaunch data={data.docs} />
       {status === 0 && <p>Loading...</p>}
-      <PaginationControls data={data} state={[page, setPage]} />
+      <PaginationControls state={[data, setData]} />
     </div>
   );
 }

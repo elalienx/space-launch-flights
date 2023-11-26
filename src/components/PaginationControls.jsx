@@ -1,6 +1,6 @@
-export default function PaginationControls({ data, state }) {
-  const [page, setPage] = state;
-  const { hasPrevPage, hasNextPage, totalDocs, limit } = data;
+export default function PaginationControls({ state }) {
+  const [data, setData] = state;
+  const { totalDocs, limit, prevPage, nextPage, page } = data;
 
   // Properties
   const recordStart = (page - 1) * limit + 1;
@@ -9,8 +9,8 @@ export default function PaginationControls({ data, state }) {
   return (
     <section className="table-controls">
       <button
-        disabled={!hasPrevPage}
-        onClick={() => setPage((currentPage) => currentPage - 1)}
+        disabled={!prevPage}
+        onClick={() => setData({ ...data, page: prevPage })}
       >
         Prev
       </button>
@@ -18,8 +18,8 @@ export default function PaginationControls({ data, state }) {
         Viewing page {page} ({recordStart}-{recordEnd} of {totalDocs})
       </span>
       <button
-        disabled={!hasNextPage}
-        onClick={() => setPage((currentPage) => currentPage + 1)}
+        disabled={!nextPage}
+        onClick={() => setData({ ...data, page: nextPage })}
       >
         Next
       </button>
