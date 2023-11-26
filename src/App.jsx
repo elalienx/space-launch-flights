@@ -12,6 +12,7 @@ export default function App() {
     docs: [],
     hasNextPage: false,
     hasPrevPage: false,
+    limit: 10,
     totalDocs: 0,
   });
   const [page, setPage] = useState(1);
@@ -19,7 +20,6 @@ export default function App() {
 
   // Properties
   const resource = "https://api.spacexdata.com/v5/launches/query";
-  const limit = 10;
 
   // Methods
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function App() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        options: { page: page, limit: limit },
+        options: { page: page, limit: data.limit },
       }),
     };
 
@@ -58,7 +58,7 @@ export default function App() {
       <h1>Space launches</h1>
       <TableLaunch data={data.docs} />
       {status === 0 && <p>Loading...</p>}
-      <PaginationControls data={data} limit={limit} state={[page, setPage]} />
+      <PaginationControls data={data} state={[page, setPage]} />
     </div>
   );
 }

@@ -1,6 +1,6 @@
-export default function PaginationControls({ data, limit, state }) {
+export default function PaginationControls({ data, state }) {
   const [page, setPage] = state;
-  const { hasPrevPage, hasNextPage, totalDocs } = data;
+  const { hasPrevPage, hasNextPage, totalDocs, limit } = data;
 
   // Properties
   const recordStart = (page - 1) * limit + 1;
