@@ -35,7 +35,7 @@ export default function App() {
       .then((response) => response.json())
       .then((result) => onSuccess(result))
       .catch((error) => onError(error));
-  }, [data.page]);
+  }, [data.page, data.limit]);
 
   function onSuccess(result) {
     console.log(result);
