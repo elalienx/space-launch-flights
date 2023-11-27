@@ -52,13 +52,13 @@ export default function App() {
   }
 
   // Safeguard
-  if (status === 2) return <p>Cannot load data ❌</p>;
+  if (status === 2) return <p>❌ Cannot load data.</p>;
 
   return (
     <div className="App">
       <h1>Space launches</h1>
       <TableLaunch data={data.docs} />
-      {status === 0 && <p>Loading...</p>}
+      {status === 0 && <p>🕒 Loading...</p>}
       <PaginationControls state={[data, setData]} />
     </div>
   );
