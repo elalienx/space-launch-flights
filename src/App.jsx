@@ -21,20 +21,23 @@ export default function App() {
 
   // Methods
   useEffect(() => {
+    const controller = new AbortController();
+
     const options = {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         options: { page: data.page, limit: data.limit },
       }),
+      signal: controller.signal,
     };
 
     fetch(resource, options)
       .then((response) => response.json())
       .then((result) => onSuccess(result))
       .catch((error) => onError(error));
+
+    return () => controller.abort();
   }, [data.page, data.limit]);
 
   function onSuccess(result) {
