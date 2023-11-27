@@ -22,13 +22,13 @@ export default function App() {
   // Methods
   useEffect(() => {
     const controller = new AbortController();
+    const bodyOptions = { page: data.page, limit: data.limit };
+    const body = JSON.stringify({ options: bodyOptions });
 
     const options = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        options: { page: data.page, limit: data.limit },
-      }),
+      body: body,
       signal: controller.signal,
     };
 
