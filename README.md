@@ -27,15 +27,6 @@ SpaceX launches from the public API [https://github.com/r-spacex/SpaceX-API/blob
     }
 ```
 
-## Component diagram
-
-Here is the diagram of the application, is quite simple but shows the props being pass to each component.
-
-- Blue: React component located in the `src/component/` folder.
-- Gray: Standard HTML tag.
-
-![Component diagram](component-diagram.png)
-
 ## Notes
 
 1. Fetch the data using "fetch" API (✅ ok)
@@ -72,6 +63,15 @@ Here is the diagram of the application, is quite simple but shows the props bein
 1. Put a placeholder image while the rocket patches are loading. I was just too lazy to copy and paste the template code from any previous project hehe.
 1. Add my own/Zalando design system but creating the design in Figma would take too much time.
 1. Organize better the CSS. Right now everything is in one file.
+
+## Component diagram
+
+Here is the diagram of the application, is quite simple but shows the props being pass to each component.
+
+- Blue: React component located in the `src/component/` folder.
+- Gray: Standard HTML tag.
+
+![Component diagram](component-diagram.png)
 
 ## Schema
 
